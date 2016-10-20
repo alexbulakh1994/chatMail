@@ -1,0 +1,16 @@
+.closeItem { 
+ 	float:right;
+ 	display:inline-block;
+ 	padding:2px 5px; 
+ 	background:#ccc;
+}
+
+.closeItem:hover {
+	cursor: pointer; 
+	cursor: hand;
+  float:right;
+  display:inline-block;
+  padding:2px 5px;
+  background:#ccc;
+  color:#fff;
+}

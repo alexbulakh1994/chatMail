@@ -1,0 +1,67 @@
+<form action="#" method="get" id="createMessage">
+  <button  type="submit" class="btn btn-primary" style="margin-bottom: 5px;">New Message</button>
+  {{#if hasMassages}}
+  <div class="panel-group" id="accordion">
+     {{# each messages}}
+      <div class="panel panel-default">
+        <div class="panel-heading" >
+            <div class = "row"> 
+              <div class="col-sm-4">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{@index}}">{{this.to}}</a>
+              </div>
+              <div class="col-sm-8">
+                <span id='close{{@index}}' iddata='{{this._id}}' class="closeItem">x</span>
+                <label name="subject">{{this.subject}}</label>
+              </div>
+            </div>
+        </div>
+        {{#ifCond @index 0}}
+          <div id="collapse{{@index}}" class="panel-collapse collapse in">
+              <div class="panel-body">{{this.text}}</div>
+          </div>
+        {{else}}
+          <div id="collapse{{@index}}" class="panel-collapse collapse">
+              <div class="panel-body">{{this.text}}</div>
+          </div>
+        {{/ifCond}}
+      </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</form>
+
+<div id="newMessage" class="modal fade" style="display: none">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">New message</h4>
+        </div>
+        <form action="#" method="get" id="messageSend">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="email">To:</label>
+              <input type="email" id="email" name="email" class="form-control" required >
+            </div>
+            <div class="form-group">
+              <label for="text">Subject:</label>
+              <input type="text" id="subject" name="subject" class="form-control" required >
+            </div>
+            <div class="form-group">
+              <label for="password">Text:</label>
+              <textarea type="text" id="mailText" name="mailText" cols="40" rows="5"  class="form-control" required ></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="../javascripts/send.js"> </script>
